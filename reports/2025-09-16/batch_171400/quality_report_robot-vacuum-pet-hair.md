@@ -1,15 +1,15 @@
 # 📊 文章质量检测报告
 
-**检测时间**: 2025-09-16 12:21:07
-**文章文件**: top-smart-plugs-for-alexa.md
-**文章路径**: articles\top-smart-plugs-for-alexa.md
+**检测时间**: 2025-09-16 17:14:00
+**文章文件**: robot-vacuum-pet-hair.md
+**文章路径**: D:\Users\claude\quality-detection-tool\articles\robot-vacuum-pet-hair.md
 **检测标准**: Hugo质量标准 + SEO优化检测
 
 ---
 
 ## 🎯 本次检查总结
 
-**总体评分**: 75/100 ⚠️ 需要优化
+**总体评分**: 93/100 ✅ 良好
 **权重分配**: 内容深度40% + SEO技术20% + 内容结构15% + 可读性10% + 合规性10% + 预留5%
 
 ### 📈 分项得分
@@ -20,23 +20,17 @@
 - ✅ **AdSense合规性**: 90/100 (优秀) - 权重10%
 
 ### 📋 问题统计
-- **通过项目**: 0项
+- **通过项目**: 14项
 - **严重问题**: 0项 (必须修改)
-- **警告问题**: 0项 (建议优化)
-- **Hugo模板**: 1项自动修复，4项需确认
+- **警告问题**: 1项 (建议优化)
+- **Hugo模板**: 0项自动修复，1项需确认
 
 ## 🔧 Hugo模板自动修复结果
 
 > **说明**: Hugo模板合规性不计入质量评分，系统已自动修复以下问题：
 
-### ✅ 已自动修复
-1. 生成标准slug: top-smart-plugs-alexa-2025-best
-
 ### ⚠️ 需要人工确认
-1. 未识别的分类 'alexa-compatible'，请确认是否正确
-2. 未识别的分类 'home-automation'，请确认是否正确
-3. {'type': 'title_length', 'issue': '标题长度 68 字符，超过建议长度', 'suggestion': '建议缩短到50-60字符，保持关键词但提高可读性', 'current_value': 'Top Smart Plugs for Alexa 2025: Best Wifi Outlets with Voice Control', 'recommended_action': '重写标题，保留主要关键词'}
-4. {'type': 'description_length', 'issue': '描述长度 161 字符，过长', 'suggestion': '精简到150-160字符，保留核心信息', 'current_value': 'Discover the best Alexa-compatible smart plugs of 2025. Compare features, prices, and reliability of...', 'recommended_action': '精简描述，突出最重要的卖点'}
+1. {'type': 'description_length', 'issue': '描述长度 125 字符，过短', 'suggestion': '扩展到150-160字符，添加更多关键词和价值主张', 'current_value': 'Research-based guide to robot vacuum pet hair reviews with honest reviews, detailed comparisons, and practical buying advice.', 'recommended_action': '重写描述，包含主要关键词和用户价值'}
 
 ## 📷 图片优化说明
 
@@ -68,29 +62,7 @@
 
 ✅ 文章质量良好，暂无需要修改的重要问题。
 
-## 📝 自动修复代码
 
-**可直接复制的修改内容:**
-
-> **注意**: 以下代码基于检测结果自动生成，使用前请确认内容正确性。
-
-```yaml
-# Front Matter修复建议
-# (请根据实际情况调整内容)
----
-title: "[已自动优化，请确认标题内容]"
-slug: "[已自动生成URL友好格式]"
-description: "[已自动生成，建议人工优化为150-160字符]"
-date: "[已设置为ISO格式]"
-categories: ["[已标准化为英文分类]"]
-tags: ["[已格式化和去重]"]
-author: "Smart Home Team"
-draft: false
----
-```
-
-**修复说明:**
-- 生成标准slug: top-smart-plugs-alexa-2025-best
 
 ## 🔍 相似度检测结果
 
@@ -123,16 +95,16 @@ python scripts/similarity_checker.py /path/to/articles --auto-process
 
 ## 📊 检测统计
 
-- **文章字数**: 1,562 字
-- **检测时长**: 48.1 秒
+- **文章字数**: 1,902 字
+- **检测时长**: 39.3 秒
 - **检测规则**: 12 项
-- **自动修复**: 1 项
-- **需要确认**: 4 项
-- **预计修改时间**: 30 分钟
+- **自动修复**: 0 项
+- **需要确认**: 1 项
+- **预计修改时间**: 15 分钟
 
 **下次检测建议**: 修改完成后重新运行检测以验证改进效果
 
 ---
 
-**报告生成时间**: 2025-09-16 12:21:07
+**报告生成时间**: 2025-09-16 17:14:00
 **工具版本**: Hugo文章质量检测工具 v2.0

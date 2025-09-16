@@ -114,10 +114,11 @@ class ChineseReporter:
             grade_text = "需要大幅改进"
             grade_color = "red"
 
-        # 统计问题
-        critical_issues = len([i for i in issues if i.get('severity') == 'critical'])
-        warning_issues = len([i for i in issues if i.get('severity') == 'warning'])
-        passed_checks = len([i for i in issues if i.get('status') == 'pass'])
+        # 从quality_scores中获取正确的统计数据
+        passed_checks = quality_scores.get('passed_checks', 0)
+        total_checks = quality_scores.get('total_checks', 15)
+        critical_issues = quality_scores.get('critical_issues_count', 0)
+        warning_issues = quality_scores.get('warning_issues_count', 0)
 
         summary = f"""## 🎯 本次检查总结
 
@@ -381,14 +382,24 @@ python scripts/similarity_checker.py /path/to/articles --auto-process
         Returns:
             保存的报告文件路径
         """
-        # 创建输出目录
-        output_path = Path(output_dir)
-        output_path.mkdir(exist_ok=True)
+        # 创建按运行批次组织的输出目录
+        now = datetime.now()
+        current_date = now.strftime('%Y-%m-%d')
 
-        # 生成报告文件名
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        # 使用类级别的批次时间戳，确保同一次脚本运行的所有报告使用相同批次
+        if not hasattr(ChineseReporter, '_global_batch_timestamp'):
+            # 脚本启动时设置全局批次时间戳
+            ChineseReporter._global_batch_timestamp = now.strftime('%H%M%S')
+
+        batch_timestamp = ChineseReporter._global_batch_timestamp
+
+        # 创建目录结构: reports/YYYY-MM-DD/batch_HHMMSS/
+        output_path = Path(output_dir) / current_date / f"batch_{batch_timestamp}"
+        output_path.mkdir(parents=True, exist_ok=True)
+
+        # 生成简洁的报告文件名
         original_name = Path(file_path).stem if file_path else 'article'
-        report_filename = f"quality_report_{timestamp}_{original_name}.md"
+        report_filename = f"quality_report_{original_name}.md"
 
         # 保存文件
         report_file_path = output_path / report_filename

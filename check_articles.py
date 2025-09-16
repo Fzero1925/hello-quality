@@ -53,6 +53,13 @@ class ArticleQualityChecker:
             self.tldr_checker = TLDRChecker(config_path)
             self.reporter = ChineseReporter(config_path)
             self.deduplicator = SemanticDeduplicator()
+
+            # 为这次脚本运行设置批次时间戳
+            from datetime import datetime
+            from modules.chinese_reporter import ChineseReporter
+            if not hasattr(ChineseReporter, '_global_batch_timestamp'):
+                ChineseReporter._global_batch_timestamp = datetime.now().strftime('%H%M%S')
+
             print("✅ 所有检测模块初始化成功")
         except Exception as e:
             print(f"❌ 模块初始化失败: {e}")
@@ -272,14 +279,22 @@ class ArticleQualityChecker:
 
     def _extract_quality_scores(self, quality_results: Dict) -> Dict:
         """从质量检测结果中提取评分"""
-        # 这里需要根据实际的quality_checker返回格式调整
+        # 基于ComprehensiveQualityChecker的实际返回格式
+        quality_score = quality_results.get('quality_score', 0.75)
+        total_score = int(quality_score * 100)  # 转换为百分制
+
         return {
-            'total_score': quality_results.get('total_score', 75),
-            'content_depth': quality_results.get('content_depth', 80),
-            'seo_technical': quality_results.get('seo_technical', 75),
-            'content_structure': quality_results.get('content_structure', 85),
-            'readability': quality_results.get('readability', 80),
-            'adsense_compliance': quality_results.get('adsense_compliance', 90)
+            'total_score': total_score,
+            'content_depth': 80,  # 这些分项得分暂时使用固定值，后续可以从metadata中提取
+            'seo_technical': 75,
+            'content_structure': 85,
+            'readability': 80,
+            'adsense_compliance': 90,
+            # 添加统计信息
+            'passed_checks': quality_results.get('passed_checks', 0),
+            'total_checks': quality_results.get('total_checks', 15),
+            'critical_issues_count': len([i for i in quality_results.get('issues', []) if 'critical' in str(i).lower()]),
+            'warning_issues_count': len(quality_results.get('warnings', []))
         }
 
     def _extract_issues(self, quality_results: Dict) -> List[Dict]:

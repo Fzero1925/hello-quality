@@ -1,15 +1,15 @@
 # 📊 文章质量检测报告
 
-**检测时间**: 2025-09-16 12:21:07
-**文章文件**: smart-home-security-system-2025.md
-**文章路径**: articles\smart-home-security-system-2025.md
+**检测时间**: 2025-09-16 17:12:26
+**文章文件**: best-smart-thermostats-2025-energy-savings.md
+**文章路径**: D:\Users\claude\quality-detection-tool\articles\best-smart-thermostats-2025-energy-savings.md
 **检测标准**: Hugo质量标准 + SEO优化检测
 
 ---
 
 ## 🎯 本次检查总结
 
-**总体评分**: 75/100 ⚠️ 需要优化
+**总体评分**: 60/100 ❌ 需要大幅改进
 **权重分配**: 内容深度40% + SEO技术20% + 内容结构15% + 可读性10% + 合规性10% + 预留5%
 
 ### 📈 分项得分
@@ -20,9 +20,9 @@
 - ✅ **AdSense合规性**: 90/100 (优秀) - 权重10%
 
 ### 📋 问题统计
-- **通过项目**: 0项
+- **通过项目**: 9项
 - **严重问题**: 0项 (必须修改)
-- **警告问题**: 0项 (建议优化)
+- **警告问题**: 2项 (建议优化)
 - **Hugo模板**: 1项自动修复，4项需确认
 
 ## 🔧 Hugo模板自动修复结果
@@ -30,13 +30,13 @@
 > **说明**: Hugo模板合规性不计入质量评分，系统已自动修复以下问题：
 
 ### ✅ 已自动修复
-1. 生成标准slug: complete-smart-home-security-system-guide
+1. 生成标准slug: best-smart-thermostats-2025-complete-guide
 
 ### ⚠️ 需要人工确认
-1. 未识别的分类 'Security Cameras'，请确认是否正确
-2. 未识别的分类 'Smart Home Security'，请确认是否正确
-3. {'type': 'title_length', 'issue': '标题长度 78 字符，超过建议长度', 'suggestion': '建议缩短到50-60字符，保持关键词但提高可读性', 'current_value': 'Complete Smart Home Security System Guide 2025: Best Cameras, Sensors & Alarms', 'recommended_action': '重写标题，保留主要关键词'}
-4. {'type': 'description_length', 'issue': '描述长度 180 字符，过长', 'suggestion': '精简到150-160字符，保留核心信息', 'current_value': 'Comprehensive guide to building the ultimate smart home security system in 2025. Compare top securit...', 'recommended_action': '精简描述，突出最重要的卖点'}
+1. 未识别的分类 'Smart Thermostats'，请确认是否正确
+2. 未识别的分类 'Energy Efficiency'，请确认是否正确
+3. {'type': 'title_length', 'issue': '标题长度 76 字符，超过建议长度', 'suggestion': '建议缩短到50-60字符，保持关键词但提高可读性', 'current_value': 'Best Smart Thermostats 2025: Complete Guide to Energy Savings & Home Comfort', 'recommended_action': '重写标题，保留主要关键词'}
+4. {'type': 'description_length', 'issue': '描述长度 173 字符，过长', 'suggestion': '精简到150-160字符，保留核心信息', 'current_value': 'Comprehensive review of the best smart thermostats in 2025. Compare Nest, Ecobee, Honeywell and more...', 'recommended_action': '精简描述，突出最重要的卖点'}
 
 ## 📷 图片优化说明
 
@@ -90,7 +90,7 @@ draft: false
 ```
 
 **修复说明:**
-- 生成标准slug: complete-smart-home-security-system-guide
+- 生成标准slug: best-smart-thermostats-2025-complete-guide
 
 ## 🔍 相似度检测结果
 
@@ -123,8 +123,8 @@ python scripts/similarity_checker.py /path/to/articles --auto-process
 
 ## 📊 检测统计
 
-- **文章字数**: 2,128 字
-- **检测时长**: 47.4 秒
+- **文章字数**: 3,409 字
+- **检测时长**: 40.3 秒
 - **检测规则**: 12 项
 - **自动修复**: 1 项
 - **需要确认**: 4 项
@@ -134,5 +134,5 @@ python scripts/similarity_checker.py /path/to/articles --auto-process
 
 ---
 
-**报告生成时间**: 2025-09-16 12:21:07
+**报告生成时间**: 2025-09-16 17:12:26
 **工具版本**: Hugo文章质量检测工具 v2.0
