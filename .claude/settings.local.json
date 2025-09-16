@@ -5,7 +5,9 @@
       "Bash(mv:*)",
       "Bash(chmod:*)",
       "Bash(grep:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(chcp:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

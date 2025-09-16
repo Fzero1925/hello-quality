@@ -120,7 +120,7 @@ class ArticleQualityChecker:
         similarity_results = {}
         try:
             # 简化的相似度检测，主要用于单文章分析
-            # 对于批量相似度检测，推荐使用独立的similarity_checker.py工具
+            # 对于批量相似度检测，推荐使用模块化相似度检测系统或代理脚本
 
             # 提取文章元数据
             metadata = {
@@ -140,7 +140,7 @@ class ArticleQualityChecker:
 
             if is_similar:
                 print(f"  ⚠️ 检测到可能的相似文章，最高相似度: {similarity_results['max_similarity']:.3f}")
-                print(f"  💡 建议使用独立工具进行详细分析: python scripts/similarity_checker.py")
+                print(f"  💡 建议使用模块化系统进行详细分析: python scripts/similarity_checker.py")
             else:
                 print("  ✅ 未检测到明显相似文章")
 
@@ -374,8 +374,9 @@ def main():
 
             # 相似度检测提示
             if result.get('similarity_results', {}).get('is_similar'):
-                print(f"\n💡 检测到相似文章，建议使用独立工具进行详细分析:")
+                print(f"\n💡 检测到相似文章，建议使用模块化系统进行详细分析:")
                 print(f"   python scripts/similarity_checker.py \"{path.parent}\" --auto-process")
+                print(f"   或直接使用: cd similarity-detection && python main.py \"{path.parent}\" --auto-process")
         else:
             print(f"❌ 检测失败: {result['error']}")
             return 1
@@ -421,8 +422,9 @@ def main():
         # 相似度检测建议
         if similar_articles_detected > 0:
             print(f"\n🔍 检测到 {similar_articles_detected} 篇文章可能存在相似内容")
-            print(f"💡 建议使用独立相似度检测工具进行批量分析:")
+            print(f"💡 建议使用模块化相似度检测系统进行批量分析:")
             print(f"   python scripts/similarity_checker.py \"{path}\" --auto-process")
+            print(f"   或直接使用: cd similarity-detection && python main.py \"{path}\" --auto-process")
 
     # 显示总耗时
     total_time = time.time() - start_time
@@ -431,7 +433,8 @@ def main():
 
     # 功能提示
     print(f"\n🛠️ 可用的独立工具:")
-    print(f"   📊 相似度检测: python scripts/similarity_checker.py")
+    print(f"   📊 相似度检测: python scripts/similarity_checker.py (模块化v2.0)")
+    print(f"   🧩 直接使用模块化: cd similarity-detection && python main.py")
     print(f"   📖 图片分析指南: docs/image_analysis_guide.md")
 
     return 0

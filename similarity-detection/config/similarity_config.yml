@@ -1,0 +1,155 @@
+# Similarity Detection Configuration
+# Comprehensive configuration for the modular similarity detection system
+
+# Core Detection Settings
+similarity_detection:
+  # Basic thresholds
+  similarity_threshold: 0.7           # Main similarity threshold (0.0-1.0)
+  tfidf_threshold: 0.7               # TF-IDF specific threshold (backward compatibility)
+  cross_topic_threshold: 0.85        # Threshold for cross-topic comparisons
+
+  # Time-based settings
+  comparison_window_days: 90          # Time window for article comparison
+
+  # Content requirements
+  min_content_length: 1000           # Minimum content length for analysis
+
+  # Similarity calculation weights
+  title_weight: 0.3                 # Weight for title similarity
+  content_weight: 0.7               # Weight for content similarity
+
+  # Quality checks
+  check_title_similarity: true      # Enable title similarity checking
+  check_content_similarity: true    # Enable content similarity checking
+
+  # File organization
+  new_articles_folder: 'new-articles'    # Folder for kept articles
+  old_articles_folder: 'old-articles'    # Folder for duplicate articles
+  keep_oldest_article: true             # Preserve oldest article in groups
+  preserve_newest: false                # Alternative: preserve newest
+  backup_before_move: true              # Create backups before moving files
+
+# Algorithm-Specific Settings
+algorithms:
+  # TF-IDF Algorithm
+  tfidf:
+    use_advanced_tfidf: true        # Use sklearn if available
+    stop_words: 'english'          # Stop words language
+    max_df: 0.8                    # Maximum document frequency
+    min_df: 0.1                    # Minimum document frequency
+    ngram_range: [1, 2]            # N-gram range for features
+
+  # SimHash Algorithm
+  simhash:
+    hamming_threshold: 16          # Maximum Hamming distance for similarity
+    ngram_size: 5                  # N-gram size for SimHash generation
+    simhash_hamm: 12              # Alternative threshold name (backward compatibility)
+
+  # Semantic Similarity Algorithm
+  semantic:
+    similarity_threshold: 0.86     # Semantic similarity threshold
+    embedding_model: 'all-MiniLM-L6-v2'  # Sentence transformer model
+    fingerprint_db_path: 'data/content_fingerprints.json'  # Cache path
+
+  # Linear Comparison Algorithm
+  linear:
+    enable_time_optimization: true # Use time-based optimization
+    enable_cross_topic_analysis: true  # Analyze cross-topic similarities
+
+# Topic Classification (Optional)
+topic_classification:
+  enabled: false                   # Enable topic-based classification
+  cross_topic_similarity_threshold: 0.85  # Higher threshold for cross-topic
+  topics:
+    technology:
+      keywords: ['tech', 'software', 'programming', 'development', 'code']
+    health:
+      keywords: ['health', 'medical', 'wellness', 'fitness', 'nutrition']
+    finance:
+      keywords: ['finance', 'money', 'investment', 'banking', 'economy']
+    # Add more topics as needed
+
+# Content Processing
+content_processing:
+  # Section exclusions for similarity checks
+  exclude_headings:
+    - 'Affiliate Disclosure'
+    - '免责声明'
+    - '声明'
+    - 'Privacy Policy'
+    - '广告'
+    - 'Sponsored'
+    - 'Advertisement'
+    - 'References'
+    - 'Resources'
+    - '联系方式'
+    - '联系我们'
+    - 'About'
+    - 'About Us'
+    - '联系'
+
+  # Text normalization
+  normalize_text: true             # Enable text normalization
+  remove_stop_words: false        # Remove stop words during processing
+
+  # Section-level checking
+  section_tfidf_threshold: 0.45   # Section-level similarity threshold
+  section_min_words: 200          # Minimum words for section checking
+
+# Report Generation
+reporting:
+  # Default output formats
+  generate_detailed_reports: true  # Generate comprehensive reports
+  generate_simple_reports: false  # Generate simplified reports by default
+  include_seo_suggestions: true   # Include SEO optimization suggestions
+
+  # Report customization
+  max_groups_in_simple_report: 10 # Maximum groups to show in simple reports
+  include_technical_details: true # Include technical algorithm details
+
+  # SEO Configuration Generation
+  seo_config:
+    generate_redirects: true      # Generate redirect configurations
+    generate_canonical: true     # Generate canonical tag mappings
+    generate_differentiation: true # Generate content differentiation suggestions
+
+    # Redirect thresholds
+    redirect_threshold: 0.8       # Similarity threshold for 301 redirects
+    canonical_threshold: 0.5     # Similarity threshold for canonical tags
+
+# File Handling
+file_handling:
+  # File operations
+  backup_duplicates: true         # Create backups of moved files
+  create_date_folders: true      # Organize files by date
+  handle_name_conflicts: true    # Auto-resolve filename conflicts
+
+  # Safety measures
+  dry_run_default: false         # Default to actual file operations
+  confirm_before_move: false     # Require confirmation before moving files
+
+# Performance and Caching
+performance:
+  # Caching
+  enable_fingerprint_cache: true  # Enable content fingerprint caching
+  cache_cleanup_days: 30         # Days to keep cached data
+
+  # Processing limits
+  max_articles_per_batch: 1000   # Maximum articles to process in one batch
+  enable_parallel_processing: false  # Enable parallel processing (experimental)
+
+# Debug and Development
+debug:
+  enable_debug_output: false     # Enable detailed debug output
+  log_similarity_calculations: false  # Log individual similarity calculations
+  save_intermediate_results: false    # Save intermediate processing results
+
+  # Performance monitoring
+  time_algorithm_execution: false # Time algorithm execution
+  memory_usage_monitoring: false # Monitor memory usage
+
+# Backward Compatibility
+# These settings maintain compatibility with the original similarity_checker.py
+backward_compatibility:
+  hugo_quality_standards_path: '../hugo_quality_standards.yml'  # Original config path
+  original_script_compatibility: true  # Maintain original script compatibility

@@ -283,14 +283,20 @@ similarity_detection:
 
 ### 🚀 使用方法
 ```bash
-# 预览检测结果
+# 使用代理脚本 (推荐，保持兼容性)
 python scripts/similarity_checker.py "articles/" --dry-run
+
+# 直接使用模块化系统 (高级用户)
+cd similarity-detection && python main.py "articles/" --dry-run
 
 # 自动处理相似文章
 python scripts/similarity_checker.py "articles/" --auto-process
 
 # 使用自定义阈值
 python scripts/similarity_checker.py "articles/" --threshold 0.4
+
+# 模块化系统测试
+cd similarity-detection && python test_modules.py
 ```
 
 ---

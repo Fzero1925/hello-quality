@@ -1,0 +1,183 @@
+# Algorithm Parameters Configuration
+# Detailed configuration for each similarity detection algorithm
+
+# TF-IDF Similarity Algorithm
+tfidf_similarity:
+  name: "TF-IDF Cosine Similarity"
+  description: "Term Frequency-Inverse Document Frequency with cosine similarity"
+
+  # Core parameters
+  title_weight: 0.3               # Weight for title similarity (0.0-1.0)
+  content_weight: 0.7             # Weight for content similarity (0.0-1.0)
+
+  # TF-IDF vectorizer parameters
+  vectorizer:
+    stop_words: 'english'         # Stop words language or custom list
+    max_df: 0.8                   # Maximum document frequency
+    min_df: 0.1                   # Minimum document frequency
+    ngram_range: [1, 2]           # N-gram range for features
+    max_features: 10000           # Maximum number of features
+
+  # Text preprocessing
+  preprocessing:
+    lowercase: true               # Convert to lowercase
+    remove_punctuation: true     # Remove punctuation
+    normalize_whitespace: true   # Normalize whitespace
+    remove_markdown: true        # Remove Markdown formatting
+    remove_urls: true            # Remove URLs and links
+
+# SimHash Similarity Algorithm
+simhash_similarity:
+  name: "SimHash Locality-Sensitive Hashing"
+  description: "Fast near-duplicate detection using SimHash fingerprints"
+
+  # Core parameters
+  hamming_threshold: 16           # Maximum Hamming distance for similarity
+  ngram_size: 5                   # N-gram size for hash generation
+  hash_size: 64                   # Hash size in bits
+
+  # LSH indexing
+  lsh_indexing:
+    enable: false                 # Enable LSH indexing for large datasets
+    band_size: 4                  # Size of each hash band
+    num_bands: 16                 # Number of bands (hash_size / band_size)
+
+  # Performance optimizations
+  performance:
+    cache_hashes: true           # Cache computed hashes
+    parallel_computation: false  # Enable parallel hash computation
+
+# Semantic Similarity Algorithm
+semantic_similarity:
+  name: "Semantic Similarity with Sentence Transformers"
+  description: "AI-powered semantic understanding using embeddings"
+
+  # Model configuration
+  model:
+    name: 'all-MiniLM-L6-v2'     # Sentence transformer model
+    device: 'cpu'                # Device for model inference ('cpu' or 'cuda')
+    batch_size: 32               # Batch size for embedding generation
+
+  # Similarity parameters
+  similarity_threshold: 0.86      # Semantic similarity threshold
+  comparison_window_days: 30      # Time window for comparisons
+  min_content_length: 500        # Minimum content length for processing
+
+  # Caching configuration
+  caching:
+    enable: true                 # Enable embedding caching
+    cache_path: 'data/content_fingerprints.json'  # Cache file path
+    cleanup_days: 30             # Days to keep cached embeddings
+
+  # Text preprocessing
+  preprocessing:
+    max_length: 8000             # Maximum text length (token limit)
+    truncate_strategy: 'end'     # Truncation strategy ('start', 'end', 'middle')
+
+# Linear Comparison Algorithm
+linear_comparison:
+  name: "Linear Chronological Comparison"
+  description: "Sequential comparison optimized for chronological data"
+
+  # Core parameters
+  preserve_earliest: true         # Preserve earliest articles in groups
+  time_window_optimization: true # Use time window for optimization
+
+  # Processing strategy
+  processing:
+    sort_by: 'effective_date'     # Sort criterion ('effective_date', 'created_time', 'filename')
+    comparison_direction: 'forward'  # Comparison direction ('forward', 'backward')
+
+  # Cross-topic analysis
+  cross_topic:
+    enable: true                 # Enable cross-topic analysis
+    threshold_multiplier: 1.2    # Multiplier for cross-topic threshold
+
+  # Performance settings
+  performance:
+    early_termination: true      # Enable early termination for optimization
+    skip_processed: true         # Skip already processed articles
+
+# Graph Clustering Algorithm
+graph_clustering:
+  name: "Graph-based Clustering"
+  description: "Complete graph analysis with connected components"
+
+  # Graph construction
+  graph_construction:
+    similarity_threshold: 0.7    # Minimum similarity for edge creation
+    complete_graph: true         # Build complete similarity graph
+
+  # Connected components
+  connected_components:
+    algorithm: 'dfs'             # Algorithm for finding components ('dfs', 'bfs')
+    min_component_size: 2        # Minimum size for duplicate groups
+
+  # Group processing
+  group_processing:
+    select_representative: 'earliest'  # How to select group representative
+    sort_by_similarity: true     # Sort group members by similarity
+
+  # Performance optimizations
+  performance:
+    sparse_matrix: true          # Use sparse matrix for large datasets
+    memory_efficient: true      # Enable memory-efficient processing
+
+# Algorithm Selection and Combination
+algorithm_selection:
+  # Default algorithms for different scenarios
+  default_algorithm: 'linear'    # Default algorithm choice
+
+  # Scenario-based selection
+  scenarios:
+    small_dataset:              # < 100 articles
+      primary: 'graph_clustering'
+      fallback: 'linear_comparison'
+
+    medium_dataset:             # 100-1000 articles
+      primary: 'linear_comparison'
+      fallback: 'tfidf_similarity'
+
+    large_dataset:              # > 1000 articles
+      primary: 'simhash_similarity'
+      fallback: 'linear_comparison'
+
+    high_precision:             # When precision is critical
+      primary: 'semantic_similarity'
+      fallback: 'graph_clustering'
+
+    fast_processing:            # When speed is critical
+      primary: 'simhash_similarity'
+      fallback: 'tfidf_similarity'
+
+# Combination strategies
+combination_strategies:
+  # Multi-algorithm approach
+  enable_multi_algorithm: false  # Use multiple algorithms
+
+  # Consensus building
+  consensus:
+    min_algorithms: 2           # Minimum algorithms for consensus
+    agreement_threshold: 0.6    # Threshold for algorithm agreement
+
+  # Weighted combination
+  weighted_combination:
+    tfidf_weight: 0.3
+    simhash_weight: 0.2
+    semantic_weight: 0.5
+
+# Quality and Validation
+quality_control:
+  # Result validation
+  validate_results: true        # Enable result validation
+  consistency_checks: true     # Check result consistency
+
+  # Quality metrics
+  metrics:
+    precision_threshold: 0.8    # Minimum precision requirement
+    recall_threshold: 0.7       # Minimum recall requirement
+
+  # Manual review flags
+  manual_review:
+    similarity_range: [0.6, 0.8]  # Range requiring manual review
+    cross_topic_flag: true      # Flag cross-topic similarities for review
