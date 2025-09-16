@@ -1,0 +1,451 @@
+# Hugo文章质量检测标准配置
+# 基于ARTICLE_TEMPLATE.md、SEO_CHECKLIST.md、URL_DESIGN_GUIDE.md标准制定
+# 优化版权重分配，图片检测权重已重新分摊
+
+# =============================================================================
+# 权重分配 (Hugo模板合规不计分，仅检测和自动修改)
+# =============================================================================
+quality_scoring:
+  weights:
+    content_depth: 0.40      # 内容深度质量 (原30% + 分摊10%)
+    seo_technical: 0.20      # SEO技术指标 (原15% + 分摊5%)
+    content_structure: 0.15  # 内容结构完整
+    readability: 0.10        # 可读性指标
+    adsense_compliance: 0.10 # AdSense合规性
+    reserved: 0.05           # 预留权重
+
+  # 最低通过分数
+  min_passing_score: 75
+  min_good_score: 85
+  min_excellent_score: 95
+
+# =============================================================================
+# Hugo模板合规检测 (不计分，但自动修改)
+# =============================================================================
+hugo_template_compliance:
+  enabled: true
+  auto_fix: true  # 启用自动修复
+
+  # 必填Front Matter字段
+  required_fields:
+    - title         # 文章标题
+    - description   # SEO描述
+    - date          # 发布日期
+    - categories    # 主分类
+    - author        # 作者
+
+  # 推荐字段
+  recommended_fields:
+    - slug          # URL路径
+    - tags          # 标签
+    - keywords      # SEO关键词
+    - featured_image # 特色图片
+    - draft         # 发布状态
+
+  # 标准分类映射 (中文自动转换为英文)
+  standard_categories:
+    # 智能控制类
+    "智能插座": "smart-plugs"
+    "智能灯泡": "smart-bulbs"
+    "智能开关": "smart-switches"
+    "智能恒温器": "smart-thermostats"
+
+    # 安全监控类
+    "安防摄像头": "security-cameras"
+    "门铃摄像头": "doorbell-cameras"
+    "智能门锁": "smart-locks"
+    "安防系统": "security-systems"
+
+    # 清洁类
+    "扫地机器人": "robot-vacuums"
+    "智能拖地机": "smart-mops"
+
+    # 娱乐控制类
+    "智能音箱": "smart-speakers"
+    "智能显示屏": "smart-displays"
+    "流媒体设备": "streaming-devices"
+
+    # 综合类
+    "智能家居": "smart-home"
+    "家庭自动化": "automation"
+    "指南教程": "guides"
+
+  # 自动修复配置
+  auto_fix_rules:
+    add_missing_author: "Smart Home Team"
+    standardize_categories: true
+    format_tags: true
+    validate_date_format: true
+    generate_slug_from_title: true
+
+# =============================================================================
+# 多维度内容深度标准 (40%权重)
+# =============================================================================
+content_depth_standards:
+  # 按文章类型分层标准
+  article_types:
+    review:  # 评测类
+      min_words: 2500
+      max_words: 4000
+      required_sections:
+        - "introduction"
+        - "key_features"
+        - "pros_and_cons"
+        - "performance_analysis"
+        - "price_comparison"
+        - "buying_recommendation"
+      min_info_density: 0.60  # 60%实用信息比例
+
+    buying_guide:  # 购买指南
+      min_words: 3000
+      max_words: 5000
+      required_sections:
+        - "what_to_look_for"
+        - "top_recommendations"
+        - "budget_analysis"
+        - "brand_comparison"
+        - "where_to_buy"
+        - "faq"
+      min_authority_signals: 3  # 至少3个权威信息源
+
+    comparison:  # 对比分析
+      min_words: 2000
+      max_words: 3500
+      required_sections:
+        - "comparison_table"
+        - "feature_matrix"
+        - "performance_analysis"
+        - "value_assessment"
+        - "final_verdict"
+      required_elements:
+        - comparison_table  # 必须包含对比表格
+        - rating_system    # 评分系统
+
+  # 按SEO意图分层
+  search_intent:
+    informational:  # What/How类搜索
+      focus: "completeness_and_authority"
+      structure: "progressive_information_hierarchy"
+
+    commercial:  # Best/Compare类搜索
+      focus: "decision_support_and_trust"
+      required_elements:
+        - price_information
+        - purchase_links
+        - user_reviews_summary
+
+    navigational:  # Brand/Product类搜索
+      focus: "specific_product_details"
+      required_depth: "detailed_specs_and_use_cases"
+
+# =============================================================================
+# SEO技术指标检测 (20%权重) - 基于SEO_CHECKLIST.md
+# =============================================================================
+seo_technical_standards:
+  # 标题优化
+  title_requirements:
+    min_length: 30
+    max_length: 60
+    include_year: true        # 包含年份如"2025"
+    include_keywords: true    # 包含主要关键词
+    avoid_keyword_stuffing: true
+
+  # 描述优化
+  description_requirements:
+    min_length: 150
+    max_length: 160
+    include_main_keyword: true
+    include_value_proposition: true  # 包含价值主张
+    click_worthy: true
+
+  # 关键词优化
+  keyword_optimization:
+    main_keyword_density_min: 0.008  # 0.8%
+    main_keyword_density_max: 0.020  # 2.0%
+    long_tail_keyword_count: 3       # 至少3个长尾关键词
+    keyword_in_first_150_words: true
+    keyword_in_conclusion: true
+
+  # 标题结构
+  heading_structure:
+    h1_count: 1               # 只能有1个H1
+    min_h2_count: 4          # 至少4个H2
+    max_h2_count: 8          # 最多8个H2
+    logical_hierarchy: true   # 逻辑清晰的层次
+
+  # 内部链接
+  internal_linking:
+    min_internal_links: 3
+    max_internal_links: 8
+    descriptive_anchor_text: true
+    relevant_target_pages: true
+
+  # URL规范 - 基于URL_DESIGN_GUIDE.md
+  url_standards:
+    structure: "/{category}/{slug}/"
+    slug_word_count_min: 3
+    slug_word_count_max: 6
+    max_length: 60
+    lowercase_only: true
+    use_hyphens: true
+    avoid_stop_words: true
+
+# =============================================================================
+# 内容结构完整性 (15%权重)
+# =============================================================================
+content_structure_requirements:
+  # 基本结构
+  basic_structure:
+    introduction_length_min: 150
+    introduction_length_max: 300
+    conclusion_required: true
+    conclusion_length_min: 100
+
+  # TL;DR检测 - Too Long; Didn't Read 要点总结
+  tldr_requirements:
+    enabled: true
+    required: true
+    position: "beginning"  # beginning, after_intro, anywhere
+    min_points: 3         # 最少要点数
+    max_points: 8         # 最多要点数
+    keywords:             # 识别TL;DR的关键词
+      - "TL;DR"
+      - "TLDR"
+      - "要点总结"
+      - "核心要点"
+      - "文章要点"
+      - "快速总结"
+      - "关键信息"
+      - "重点摘要"
+
+  # 必需元素
+  required_elements:
+    - table_of_contents  # 目录(长文章)
+    - faq_section       # FAQ部分
+    - conclusion        # 结论
+    - tldr_section      # TL;DR要点总结
+
+  # 推荐元素
+  recommended_elements:
+    - key_takeaways     # 要点总结
+    - comparison_table  # 对比表格
+    - step_by_step_guide # 步骤指南
+
+  # 可读性要素
+  readability_elements:
+    use_bullet_points: true
+    use_numbered_lists: true
+    max_paragraph_length: 150 # 段落最大长度
+    use_subheadings: true
+
+# =============================================================================
+# AdSense合规性检测 (10%权重)
+# =============================================================================
+adsense_compliance:
+  # 禁用短语检测 (增强版)
+  forbidden_phrases:
+    # 强制性词汇 (严重违规)
+    critical:
+      - "click here"
+      - "buy now"
+      - "act now"
+      - "limited time only"
+      - "best deal ever"
+      - "guaranteed results"
+      - "100% guaranteed"
+      - "get rich quick"
+      - "make money fast"
+      - "exclusive offer"
+      - "miracle solution"
+      - "secret method"
+      - "amazing discovery"
+      - "special discount"
+
+    # 诱导性词汇 (警告)
+    warning:
+      - "must buy"
+      - "don't miss"
+      - "hurry up"
+      - "while supplies last"
+      - "act fast"
+      - "limited quantity"
+      - "today only"
+      - "flash sale"
+      - "super sale"
+      - "mega deal"
+
+    # 夸大宣传 (建议避免)
+    suggestion:
+      - "revolutionary"
+      - "breakthrough"
+      - "life-changing"
+      - "game-changer"
+      - "incredible"
+      - "unbelievable"
+      - "phenomenal"
+      - "outstanding"
+
+  # 内容来源验证 (保持禁用状态)
+  source_verification:
+    enabled: false  # 手写文章保持禁用来源验证
+    note: "手写文章暂不需要来源验证，专注质量检测"
+
+    # 调整后的标准（比自动生成文章宽松）
+    min_sources: 2                    # 最少2个来源（降低要求）
+    min_trusted_ratio: 0.50          # 50%权威来源（降低要求）
+    min_content_length_for_sources: 2000  # 2000字以上文章才要求来源
+
+    # 权威域名列表（扩展）
+    trusted_domains:
+      # 电商平台
+      - 'amazon.com'
+      - 'bestbuy.com'
+      - 'walmart.com'
+      - 'target.com'
+      - 'homedepot.com'
+      - 'costco.com'
+
+      # 科技评测
+      - 'cnet.com'
+      - 'pcmag.com'
+      - 'techradar.com'
+      - 'theverge.com'
+      - 'engadget.com'
+      - 'tomshardware.com'
+      - 'androidcentral.com'
+      - 'imore.com'
+
+      # 消费者测试
+      - 'consumerreports.org'
+      - 'wirecutter.com'
+      - 'rtings.com'
+      - 'which.co.uk'
+
+      # 智能家居专业
+      - 'smartthings.com'
+      - 'iotforall.com'
+      - 'staceyoniot.com'
+      - 'smarthomepoint.com'
+      - 'digitaltrends.com'
+
+      # 官方网站和规范
+      - 'matter.org'
+      - 'zigbee.org'
+      - 'thread.org'
+      - 'apple.com'
+      - 'google.com'
+      - 'microsoft.com'
+
+  # 必需免责声明
+  required_disclaimers:
+    affiliate_disclosure: true      # 联盟关系披露
+    commission_disclosure: true     # 佣金收入披露
+    research_methodology: true      # 研究方法说明
+
+  # 内容质量要求
+  content_quality:
+    min_original_content: 0.85      # 85%原创内容
+    avoid_misleading_claims: true
+    factual_accuracy: true
+
+# =============================================================================
+# 图片优化标准 (权重已分摊，但保留检测标准)
+# =============================================================================
+image_optimization:
+  # 系统限制说明
+  system_limitations: |
+    当前质量检测工具存在技术局限，无法直接分析文章中的图片内容和featured_image目录文件。
+    因此图片相关检测可能不完整，需要人工验证。
+
+  # 图片数量要求
+  quantity_requirements:
+    min_total_images: 3           # 最少3张图片
+    min_featured_images: 1       # 1张featured图片
+    min_inline_images: 2         # 2张内容图片
+
+  # 技术要求
+  technical_requirements:
+    preferred_format: "webp"
+    backup_format: "jpeg"
+    max_file_size: 500           # KB
+    compression_quality: 85      # %
+
+    # 尺寸标准
+    featured_image_size: "1200x630"   # 适合社交分享
+    content_image_size: "800x600"     # 内容图片
+    thumbnail_size: "300x200"         # 缩略图
+
+  # SEO优化
+  seo_requirements:
+    alt_text_min_length: 50
+    alt_text_max_length: 125
+    alt_text_include_keywords: true
+    descriptive_filename: true
+    keyword_in_filename: true
+
+  # 文件路径标准
+  path_standards:
+    featured_image_path: "static/images/{category}/{slug}/hero.webp"
+    content_image_path: "static/images/{category}/{slug}/inline_{n}.webp"
+
+# =============================================================================
+# 相似度检测配置
+# =============================================================================
+similarity_detection:
+  enabled: true
+  tfidf_threshold: 0.40               # 同类别文章相似度阈值
+  simhash_threshold: 12
+  comparison_window_days: 14          # 14天比较窗口
+  min_content_length: 1000
+
+  # 自动处理配置
+  auto_move_similar: true
+  keep_oldest_article: true           # 保留最早的文章
+  new_articles_folder: "new-articles" # 保留文章目标文件夹
+  old_articles_folder: "old-articles" # 相似文章目标文件夹
+  similarity_report: true
+
+  # 主题分类配置 (避免跨类别误判)
+  topic_classification:
+    enabled: true
+    cross_topic_similarity_threshold: 0.70  # 跨主题相似度阈值
+
+    # 智能家居主题关键词
+    topics:
+      smart_plugs:
+        keywords: ["smart plug", "energy monitoring", "智能插座", "能耗监控", "power monitoring"]
+
+      security_cameras:
+        keywords: ["security camera", "outdoor camera", "wireless camera", "安防摄像头", "监控摄像机", "surveillance"]
+
+      doorbell_cameras:
+        keywords: ["doorbell camera", "video doorbell", "可视门铃", "智能门铃", "door bell"]
+
+      smart_locks:
+        keywords: ["smart lock", "door lock", "智能门锁", "电子锁", "keypad lock"]
+
+      robot_vacuums:
+        keywords: ["robot vacuum", "vacuum cleaner", "扫地机器人", "吸尘器", "robotic cleaner"]
+
+      smart_switches:
+        keywords: ["smart switch", "wall switch", "智能开关", "墙面开关", "light switch"]
+
+# =============================================================================
+# 来源验证规则 (已整合到AdSense合规性检测中)
+# =============================================================================
+# 注意: 来源验证功能已迁移到 adsense_compliance.source_verification
+# 此部分保留用于向后兼容，但建议使用新的配置
+
+# =============================================================================
+# 报告配置
+# =============================================================================
+report_settings:
+  language: "zh-CN"          # 中文报告
+  output_format: "markdown"
+  include_fix_suggestions: true
+  include_auto_fix_code: true
+  timestamp_format: "%Y-%m-%d %H:%M:%S"
+
+  # 报告目录
+  reports_directory: "reports"
+  report_filename_format: "quality_report_{timestamp}_{filename}.md"

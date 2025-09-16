@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ title }}",
+  "datePublished": "{{ date }}",
+  "dateModified": "{{ lastmod }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ author }}"
+  },
+  "image": [
+    "{{ featured_image }}"
+  ],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ permalink }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Smart Home Hub"
+  },
+  "about": "{{ category }}"
+}

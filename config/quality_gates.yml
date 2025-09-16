@@ -1,0 +1,158 @@
+# v3 Hard Gate Quality Configuration
+# Strict quality requirements for content generation
+
+entity_coverage:
+  required_fields:
+    - 'category'
+    - 'product_type'
+    - 'use_case'
+    - 'protocol'      # WiFi, Zigbee, Matter, etc.
+    - 'brand'         # Product brand/manufacturer
+  min_coverage: 0.80  # 80% entity coverage required (4/5 fields)
+
+content_depth:
+  min_sections: 6
+  min_words: 2500
+  required_sections:
+    - 'introduction'
+    - 'key_features'
+    - 'comparison'
+    - 'installation'
+    - 'faq'
+    - 'conclusion'
+  optional_sections:
+    - 'compatibility'
+    - 'troubleshooting'
+    - 'buying_guide'
+
+information_sources:
+  min_sources: 3
+  min_trusted_ratio: 0.60  # 60% of sources must be from trusted domains
+  trusted_domains:
+    # E-commerce
+    - 'amazon.com'
+    - 'bestbuy.com'
+    - 'walmart.com'
+    - 'target.com'
+    - 'homedepot.com'
+    # Tech reviews
+    - 'cnet.com'
+    - 'pcmag.com'
+    - 'techradar.com'
+    - 'theverge.com'
+    - 'engadget.com'
+    # Consumer testing
+    - 'consumerreports.org'
+    - 'wirecutter.com'
+    - 'rtings.com'
+    # Smart home specific
+    - 'smartthings.com'
+    - 'iotforall.com'
+    - 'staceyoniot.com'
+
+adsense_compliance:
+  # Phrases that violate AdSense policies
+  forbidden_phrases:
+    - 'click here'
+    - 'best deal ever'
+    - 'limited time only'
+    - 'guaranteed results'
+    - 'amazing discovery'
+    - 'miracle solution'
+    - 'secret method'
+    - 'exclusive offer'
+    - 'act now'
+    - 'buy now'
+    - 'special discount'
+  
+  # Required disclaimers for compliance
+  required_disclaimers:
+    - 'affiliate'       # Affiliate relationship disclosure
+    - 'commission'      # Commission earning disclosure  
+    - 'research'        # Research-based methodology
+  
+  # Content quality requirements
+  min_original_content: 0.85  # 85% original content required
+
+technical_seo:
+  heading_structure:
+    h1_count: 1         # Exactly 1 H1 required
+    min_h2_count: 4     # Minimum 4 H2 headings
+    max_h2_count: 8     # Maximum 8 H2 headings
+  
+  meta_requirements:
+    min_intro_length: 150    # First paragraph minimum length
+    max_intro_length: 300    # First paragraph maximum length
+  
+  required_elements:
+    - 'faq'            # FAQ section for featured snippets
+    - 'conclusion'     # Clear conclusion section
+  
+  optional_elements:
+    - 'table_of_contents'    # TOC for long articles
+    - 'key_takeaways'        # Summary of key points
+
+content_angles:
+  # Four main content angle types for comprehensive coverage
+  buyers_guide:
+    required_sections:
+      - 'what_to_look_for'
+      - 'top_recommendations'
+      - 'price_comparison'
+      - 'where_to_buy'
+  
+  compatibility:
+    required_sections:
+      - 'protocol_support'
+      - 'ecosystem_integration'
+      - 'device_requirements'
+      - 'setup_process'
+  
+  comparison:
+    required_sections:
+      - 'feature_matrix'
+      - 'pros_and_cons'
+      - 'performance_analysis'
+      - 'value_assessment'
+  
+  installation:
+    required_sections:
+      - 'prerequisites'
+      - 'step_by_step_guide'
+      - 'troubleshooting'
+      - 'safety_considerations'
+
+quality_scoring:
+  # Minimum scores for each gate to pass
+  min_entity_score: 0.80
+  min_depth_score: 0.85
+  min_sources_score: 0.75
+  min_adsense_score: 0.95
+  min_seo_score: 0.70
+  
+  # Overall minimum score to pass all gates
+  min_overall_score: 0.90
+  
+  # Weight distribution for overall score calculation
+  weights:
+    entity_coverage: 0.20
+    content_depth: 0.25
+    information_sources: 0.20
+    adsense_compliance: 0.20
+    technical_seo: 0.15
+
+semantic_deduplication:
+  # Prevent similar content generation
+  similarity_threshold: 0.86  # Content similarity threshold
+  comparison_window: 30       # Compare against last 30 articles
+  embedding_model: 'all-MiniLM-L6-v2'  # sentence-transformers model
+
+automation:
+  # Quality gate integration settings
+  enforce_in_pipeline: true
+  max_retry_attempts: 3
+  auto_fix_minor_issues: true
+  
+  # Notification settings
+  notify_on_failure: true
+  generate_improvement_report: true

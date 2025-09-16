@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Users/Fzero/project/ai-smarthome/content-generation-tool/**)",
+      "Bash(mv:*)",
+      "Bash(chmod:*)",
+      "Bash(grep:*)",
+      "Bash(python:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

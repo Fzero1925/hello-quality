@@ -1,0 +1,37 @@
+# Uniqueness & Deduplication Configuration
+
+# TF‑IDF document-level similarity threshold
+tfidf_threshold: 0.30
+
+# Lookback window in days
+days_window: 90
+
+# SimHash near-duplicate precheck (64-bit Hamming distance)
+simhash_hamm: 12
+
+# Section-level check (only runs if doc-level passes)
+section_tfidf_threshold: 0.45
+section_min_words: 200
+
+# Exclude sections (by heading) from similarity checks to avoid false positives
+exclude_headings:
+  - Affiliate Disclosure
+  - 免责声明
+  - 声明
+  - Privacy Policy
+  - 广告
+  - Sponsored
+  - Advertisement
+  - References
+  - Resources
+  - 联系方式
+  - 联系我们
+  - About
+  - About Us
+  - 联系
+
+# Reserved for future dynamic policy (time decay, category weights, etc.)
+# time_decay:
+#   recent_7d: 0.25
+#   recent_30d: 0.30
+#   recent_60d: 0.35
